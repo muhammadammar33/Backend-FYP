@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Elysian-Web.props" />
+</Project>
