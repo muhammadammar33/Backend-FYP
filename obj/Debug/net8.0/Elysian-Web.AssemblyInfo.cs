@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Elysian-Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d16a30a4a7a924dfd95e2f3570e647c2b31b3b13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff3e159b579b52cb3f16d7254aa5a80063f859d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Elysian-Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Elysian-Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -403,3 +403,4 @@ D:\Study Material\FYP\Project\Elysian_1.0\Elysian-Web\obj\Debug\net8.0\refint\El
 D:\Study Material\FYP\Project\Elysian_1.0\Elysian-Web\obj\Debug\net8.0\Elysian-Web.pdb
 D:\Study Material\FYP\Project\Elysian_1.0\Elysian-Web\obj\Debug\net8.0\Elysian-Web.genruntimeconfig.cache
 D:\Study Material\FYP\Project\Elysian_1.0\Elysian-Web\obj\Debug\net8.0\ref\Elysian-Web.dll
+D:\Study Material\FYP\Project\Elysian_1.0\Elysian-Web\obj\Debug\net8.0\Elysian-Web.sourcelink.json

@@ -25,26 +25,26 @@ namespace Elysian.Controllers
                 return BadRequest(ModelState); // Return validation errors
             }
 
-            var storeExists = await _context.Stores.FindAsync(product.StoreID);
+            var storeExists = await _context.Stores.FindAsync(product.StoreId);
             if (storeExists == null)
             {
-                return NotFound($"Store with ID {product.StoreID} does not exist.");
+                return NotFound($"Store with ID {product.StoreId} does not exist.");
             }
 
-            product.CreatedDate = DateTime.UtcNow;
+            product.CreatedAt = DateTime.UtcNow;
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = product.ProductID }, product);
+            return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
 
         // GET: api/Product/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var product = await _context.Products
                 .Include(p => p.Store) // Include store details
-                .FirstOrDefaultAsync(p => p.ProductID == id);
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product == null)
             {
@@ -67,7 +67,7 @@ namespace Elysian.Controllers
 
         // GET: api/Product/Store/{storeId}
         [HttpGet("Store/{storeId}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetByStore(int storeId)
+        public async Task<ActionResult<IEnumerable<Product>>> GetByStore(Guid storeId)
         {
             var storeExists = await _context.Stores.FindAsync(storeId);
             if (storeExists == null)
@@ -76,7 +76,7 @@ namespace Elysian.Controllers
             }
 
             var products = await _context.Products
-                .Where(p => p.StoreID == storeId)
+                .Where(p => p.StoreId == storeId)
                 .ToListAsync();
 
             return Ok(products);
@@ -84,9 +84,9 @@ namespace Elysian.Controllers
 
         // PUT: api/Product/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Product updatedProduct)
+        public async Task<IActionResult> Update(Guid id, [FromBody] Product updatedProduct)
         {
-            if (id != updatedProduct.ProductID)
+            if (id != updatedProduct.Id)
             {
                 return BadRequest("Product ID mismatch.");
             }
@@ -97,11 +97,11 @@ namespace Elysian.Controllers
                 return NotFound($"Product with ID {id} not found.");
             }
 
-            existingProduct.ProductName = updatedProduct.ProductName;
+            existingProduct.Name = updatedProduct.Name;
             existingProduct.Description = updatedProduct.Description;
             existingProduct.Price = updatedProduct.Price;
             existingProduct.Stock = updatedProduct.Stock;
-            existingProduct.StoreID = updatedProduct.StoreID;
+            existingProduct.StoreId = updatedProduct.StoreId;
 
             try
             {

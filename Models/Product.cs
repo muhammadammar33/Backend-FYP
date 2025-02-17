@@ -1,33 +1,63 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Elysian.Models
 {
     public class Product
     {
-        public int ProductID { get; set; }
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required(ErrorMessage = "The StoreID field is required.")]
-        public int StoreID { get; set; } // Foreign key
+        [Required]
+        public Guid StoreId { get; set; }
 
-        [Required(ErrorMessage = "The ProductName field is required.")]
-        public string ProductName { get; set; }
+        [ForeignKey("StoreId")]
+        public Store Store { get; set; }
 
+        [Required]
+        public Guid CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public Categories Categories { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Name { get; set; }
+
+        [MaxLength(500)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "The Price field is required.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
+        [MaxLength(500)]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "The Stock field is required.")]
         [Range(0, int.MaxValue, ErrorMessage = "Stock must be a non-negative number.")]
         public int Stock { get; set; }
 
-        [Required]
-        public DateTime CreatedDate { get; set; }
+        public bool IsFeatured { get; set; } = false;
 
-        // Navigation property for EF Core (excluded from validation/serialization)
-        [JsonIgnore]
-        public Store? Store { get; set; }
+        public bool IsArchived { get; set; } = false;
+
+        [Required]
+        public Guid SizeId { get; set; }
+
+        [ForeignKey("SizeId")]
+        public Size Size { get; set; }
+        
+        [Required]
+        public Guid ColorId { get; set; }
+
+        [ForeignKey("ColorId")]
+        public Color Color { get; set; }
+
+        public ICollection<Image> Images { get; set; } = new List<Image>();
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
+        [Required]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
 }

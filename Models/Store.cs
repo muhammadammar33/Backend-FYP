@@ -24,6 +24,7 @@ namespace Elysian.Models
         public ICollection<Categories> Categories { get; set; } = new List<Categories>();
         public ICollection<Size> Size { get; set; } = new List<Size>();
         public ICollection<Color> Color { get; set; } = new List<Color>();
+        public ICollection<Product> Product { get; set; } = new List<Product>();
 
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
